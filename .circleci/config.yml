@@ -220,6 +220,7 @@ jobs:
           name: Install dependencies
           command: |
             yum install python37 -y
+            yum -y install tar gzip
             curl -O https://bootstrap.pypa.io/get-pip.py
             python3 get-pip.py
             pip install ansible
@@ -259,7 +260,6 @@ jobs:
           name: Install dependencies
           command: |
             apt update -y
-            curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash –
             apt update -y
             apt -y install tar gzip nodejs npm
             pip install ansible awscli
