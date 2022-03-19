@@ -1,0 +1,31 @@
+---
+- name: "Copy compiled app"
+  copy:
+    src: 
+    dest: "~/artifact.tar.gz"
+
+
+- name: "Unzip backend files to correct directory"
+  ansible.builtin.unarchive:
+    src: artifact.tar.gz
+    dest: ~/backend
+    
+- name: "Install dependencies for project"
+  shell: |
+    cd ~/backend
+    npm install
+    
+- name: "Executing node"
+  shell: |
+    export
+    cd ~/backend_app
+    pm2 start main.js
+  register: execute_node
+
+- name: print message
+  debug:
+    msg: "{{ execute_node.stdout_lines }}"
+
+- name: "Configure pm2 to start as service"
+  shell: |
+    env PATH=$PATH:/usr/local/bin pm2 startup -u ubuntu
