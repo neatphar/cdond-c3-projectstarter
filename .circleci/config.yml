@@ -225,7 +225,7 @@ jobs:
             python3 get-pip.py
             pip install ansible
             amazon-linux-extras install epel
-            yum install nodejs npm
+            yum -y install nodejs npm
       - run:
           name: Get backend url
           command: |
