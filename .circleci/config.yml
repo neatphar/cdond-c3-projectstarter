@@ -221,7 +221,7 @@ jobs:
           command: |
             yum install python37 -y
             curl -O https://bootstrap.pypa.io/get-pip.py
-            python3 get-pip.py --user
+            python3 get-pip.py
             pip install ansible
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
             . ~/.nvm/nvm.sh
@@ -259,7 +259,6 @@ jobs:
           name: Install dependencies
           command: |
             apt update -y
-            apt-get install python-software-properties
             curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash –
             apt update -y
             apt -y install tar gzip nodejs npm
