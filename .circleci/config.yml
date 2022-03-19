@@ -224,7 +224,6 @@ jobs:
             curl -O https://bootstrap.pypa.io/get-pip.py
             python3 get-pip.py
             pip install ansible
-            amazon-linux-extras install epel -y
             yum -y install nodejs npm
       - run:
           name: Get backend url
