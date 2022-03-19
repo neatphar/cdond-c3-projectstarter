@@ -219,7 +219,10 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            pip3 install ansible
+            yum install python37
+            curl -O https://bootstrap.pypa.io/get-pip.py
+            python3 get-pip.py --user
+            pip install ansible
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
             . ~/.nvm/nvm.sh
             nvm install node
@@ -255,8 +258,10 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            apt-get install python-software-properties
+            curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash –
             apt update -y
-            apt -y install tar gzip nodejs
+            apt -y install tar gzip nodejs npm
             pip install ansible awscli
       - run:
           name: Deploy
