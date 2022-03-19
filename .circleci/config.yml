@@ -219,7 +219,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apt upgate -y
+            apt update -y
             apt -y install tar gzip
             apt install python3.7 -y
             curl -O https://bootstrap.pypa.io/get-pip.py
