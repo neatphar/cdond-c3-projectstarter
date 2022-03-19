@@ -169,6 +169,7 @@ jobs:
     docker:
       - image: "python:3.7-slim"
     steps:
+      - checkout
       - add_ssh_keys:
           fingerprints: [ "ad:e6:2c:d2:2d:9e:2c:f3:92:33:85:3b:b4:c5:3f:3a" ]
       - run:
@@ -242,6 +243,7 @@ jobs:
     docker:
       - image: "python:3.7-slim"
     steps:
+      - checkout
       - add_ssh_keys:
           fingerprints: [ "ad:e6:2c:d2:2d:9e:2c:f3:92:33:85:3b:b4:c5:3f:3a" ]
       - run:
@@ -346,10 +348,10 @@ workflows:
           requires: [deploy-infrastructure]
       - run-migrations:
           requires: [configure-infrastructure]
-      # - deploy-frontend:
-      #     requires: [run-migrations]
-      # - deploy-backend:
-      #     requires: [run-migrations]
+      - deploy-frontend:
+          requires: [run-migrations]
+      - deploy-backend:
+          requires: [run-migrations]
       # - smoke-test:
       #     requires: [deploy-backend, deploy-frontend]
       # - cloudfront-update:
