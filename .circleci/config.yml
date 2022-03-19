@@ -224,7 +224,7 @@ jobs:
             curl -O https://bootstrap.pypa.io/get-pip.py
             python3 get-pip.py
             pip install ansible
-            amazon-linux-extras -y install epel
+            amazon-linux-extras install epel -y
             yum -y install nodejs npm
       - run:
           name: Get backend url
@@ -283,10 +283,12 @@ jobs:
       - image: "python:3.7-slim"
     steps:
       - checkout
-      # - run:
-      #     name: Install dependencies
-      #     command: |
-      #       # your code here
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt update -y
+            sudo apt upgrade -y 
+            apt install curl -y
       - run:
           name: Get backend url
           command: |
@@ -294,14 +296,29 @@ jobs:
       - run:
           name: Backend smoke test.
           command: |
-            # your code here
+            export API_URL="http://${BACKEND_IP}:3030"
+            echo "${API_URL}"
+            if curl "${API_URL}/api/status" | grep "ok"
+            then
+                return 0
+            else
+                return 1
+            fi
       - run:
           name: Frontend smoke test.
           command: |
-            # your code here
+            URL="http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-us-east-1.amazonaws.com/#/employees"            
+            echo ${URL} 
+            if curl -s ${URL} | grep "Welcome"
+            then
+                # Change this to 0 after the job fails
+              return 1
+            else
+              return 1
+            fi
+
       - destroy-environment:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
-
       - revert-migrations:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
