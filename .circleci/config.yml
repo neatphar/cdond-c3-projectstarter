@@ -219,7 +219,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum install python37
+            yum install python37 -y
             curl -O https://bootstrap.pypa.io/get-pip.py
             python3 get-pip.py --user
             pip install ansible
@@ -258,6 +258,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            apt update -y
             apt-get install python-software-properties
             curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash –
             apt update -y
