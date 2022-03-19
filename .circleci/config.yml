@@ -165,24 +165,24 @@ jobs:
       - destroy-environment:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
-  # configure-infrastructure:
-  #   docker:
-  #     # Docker image here that supports Ansible
-  #   steps:
-  #     # Checkout code from git
-  #     # Add ssh keys with fingerprint
-  #     # attach workspace
-  #     - run:
-  #         name: Install dependencies
-  #         command: |
-  #           # Your code here
-  #           exit 1
-  #     - run:
-  #         name: Configure server
-  #         command: |
-  #           # Your code here
-  #           exit 1
-  #     # Here's where you will add some code to rollback on failure      
+  configure-infrastructure:
+    docker:
+      - image: "demisto/boto3py3:1.0.0.27287"
+    steps:
+      - add_ssh_keys:
+          fingerprints: [ "ad:e6:2c:d2:2d:9e:2c:f3:92:33:85:3b:b4:c5:3f:3a" ]
+      - run:
+          name: Install dependencies
+          command: |
+            yum -y install tar gzip
+            pip install ansible
+            
+      - run:
+          name: Configure server
+          command: |
+            cd .circleci/ansible
+            ansible-playbook -i inventory.txt configure-server.yml
+      # Here's where you will add some code to rollback on failure      
 
   # run-migrations:
   #   docker:
