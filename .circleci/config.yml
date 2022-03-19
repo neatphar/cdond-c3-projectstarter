@@ -211,7 +211,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -219,12 +219,12 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum -y install nodejs npm
-            yum -y install tar gzip
-            yum install python37 -y
+            apt upgate -y
+            apt -y install tar gzip
+            apt install python3.7 -y
             curl -O https://bootstrap.pypa.io/get-pip.py
             python3 get-pip.py
-            pip install ansible
+            pip install ansible awscli
       - run:
           name: Get backend url
           command: |
@@ -291,7 +291,7 @@ jobs:
       - run:
           name: Get backend url
           command: |
-            echo ${BACKEND_IP}
+            export BACKEND_IP=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
       - run:
           name: Backend smoke test.
           command: |
