@@ -8,22 +8,10 @@
 
 - name: "Install Utility."
   apt:
-    name: [ "software-properties-common", "zip", "unzip", "tar" ]
+    name: [ "zip", "unzip", "tar" ]
     state: latest
     update_cache: yes
 
-- name: "Adding Python Repo"
-  shell: add-apt-repository ppa:deadsnakes/ppa
-
-- name: "Update APT Packages."
-  apt:
-    update_cache: yes
-
-- name: "Install Python and Utility."
-  apt:
-    name: ["python3.8"]
-    state: latest
-    update_cache: yes
 
 - name: install node
   shell: |
