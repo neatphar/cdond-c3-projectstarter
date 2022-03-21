@@ -184,7 +184,7 @@ jobs:
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text >> ~/project/.circleci/ansible/inventory.txt
-            ansible-playbook -i inventory.txt configure-server.yml
+            # ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
@@ -284,6 +284,8 @@ jobs:
     docker:
       - image: amazon/aws-cli
     steps:
+      - add_ssh_keys:
+          fingerprints: [ "ad:e6:2c:d2:2d:9e:2c:f3:92:33:85:3b:b4:c5:3f:3a" ]
       - checkout
       - run:
           name: Install dependencies
@@ -313,7 +315,7 @@ jobs:
             echo ${URL} 
             if curl -s ${URL} | grep "Welcome"
             then
-              return 0
+              return 1
             else
               return 1
             fi
