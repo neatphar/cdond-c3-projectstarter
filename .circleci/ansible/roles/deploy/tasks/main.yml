@@ -7,7 +7,7 @@
 
 - name: "Unzip backend files to correct directory"
   ansible.builtin.unarchive:
-    src: artifact.tar.gz
+    src: ~/artifact.tar.gz
     dest: ~/backend
     
 - name: "Install dependencies for project"
