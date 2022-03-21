@@ -224,7 +224,7 @@ jobs:
           name: Install dependencies
           command: |
             apt update -y
-            apt -y install tar gzip
+            apt -y install tar gzip curl
             pip install ansible awscli
       - run:
           name: Get backend url
@@ -260,7 +260,7 @@ jobs:
           name: Install dependencies
           command: |
             apt update -y
-            apt -y install tar gzip nodejs npm
+            apt -y install tar gzip nodejs npm curl
             pip install ansible awscli
       - run:
           name: Deploy
