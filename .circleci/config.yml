@@ -211,7 +211,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: nikolaik/python-nodejs:python3.7-nodejs14
     steps:
       - checkout
       - restore_cache:
@@ -221,9 +221,6 @@ jobs:
           command: |
             apt update -y
             apt -y install tar gzip
-            apt install python3.7 -y
-            curl -O https://bootstrap.pypa.io/get-pip.py
-            python3 get-pip.py
             pip install ansible awscli
       - run:
           name: Get backend url
