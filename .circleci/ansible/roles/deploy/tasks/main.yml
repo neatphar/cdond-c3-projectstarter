@@ -4,6 +4,8 @@
     src: "~/artifact.tar.gz"
     dest: "~/artifact.tar.gz"
 
+- name: "Make folder"
+  shell: mkdir ~/backend
 
 - name: "Unzip backend files to correct directory"
   ansible.builtin.unarchive:
