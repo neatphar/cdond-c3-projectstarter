@@ -276,14 +276,14 @@ jobs:
 
   smoke-test:
     docker:
-      - image: "python:3.7-slim"
+      - image: "python:3.9-buster"
     steps:
       - checkout
       - run:
           name: Install dependencies
           command: |
-            sudo apt update -y
-            sudo apt upgrade -y 
+            apt update -y
+            apt upgrade -y 
             apt install curl -y
       - run:
           name: Get backend url
