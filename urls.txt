@@ -1,0 +1,5 @@
+URL01: https://github.com/neatphar/cdond-c3-projectstarter/
+URL02: http://udapeople-89aec9e.s3-website-us-east-1.amazonaws.com/
+URL03: http://dozimaki0q551.cloudfront.net	
+URL04: http://54.234.159.179:3030/api/status
+URL05: http://52.87.205.126:9090/targets
